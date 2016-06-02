@@ -11,3 +11,8 @@ workflows:
         - type: webphp
           description: Post to Slack on sync code
           script: private/scripts/slack_notification.php
+  clear_cache:
+    after:
+        - type: webphp
+          description: Someone is clearing the cache again
+          script: private/scripts/slack_notification.php
