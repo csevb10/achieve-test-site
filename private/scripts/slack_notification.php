@@ -6,7 +6,7 @@ $pantheon_yellow = '#EFD01B';
 // Default values for parameters
 $defaults = array(
   'slack_channel' => '@csevb10',
-  'slack_username' => 'Pantheon-Quicksilver',
+  'slack_username' => 'Pantheon',
   'always_show_text' => false,
 );
 
