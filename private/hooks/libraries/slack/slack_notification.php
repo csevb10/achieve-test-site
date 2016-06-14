@@ -148,7 +148,6 @@ function _slack_notification($slack_url, $channel, $username, $text, $attachment
   $post = array(
     'username' => $username,
     'channel' => $channel,
-    'icon_emoji' => $icon,
     'attachments' => array($attachment)
   );
 
