@@ -25,7 +25,7 @@ $fields = array(
     'value' => $site,
     'short' => 'true'
   ),
-  array( // Render Environment name with link to site, <http://{ENV}-{SITENAME}.pantheon.io|{ENV}>
+  array( // Render Environment name with link to site
     'title' => 'Environment',
     'value' => '<' . $url . '|' . $environment . '>',
     'short' => 'true'
@@ -62,7 +62,7 @@ switch($type) {
     // https://api.slack.com/incoming-webhooks
     $text = 'Deploy to the '. $environment;
     $text .= ' environment of '. $site . ' complete!';
-    // $text .= "\n\n*DEPLOY MESSAGE*: $deploy_message";
+
     // Build an array of fields to be rendered with Slack Attachments as a table
     // attachment-style formatting:
     // https://api.slack.com/docs/attachments
