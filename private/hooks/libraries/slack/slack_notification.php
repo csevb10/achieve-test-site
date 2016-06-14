@@ -13,7 +13,7 @@ else {
 
 $color  = isset($defaults['color']) ? $defaults['color'] : '#EFD01B';
 $url    = 'http://' . str_replace(array("\r\n", "\n"), '', (isset($defaults['url']) ? $defaults['url'] : `drush @$site.$environment status | perl -F'/[\s:]+/' -lane '/Site URI/ && print \$F[3]'`));
-$icon   = isset($defaults['icon']) ? $defaults['icon'] : ':lightning_cloud:';
+$icon   = isset($defaults['icon_url']) ? $defaults['icon_url'] : NULL;
 $type   = isset($type) ? $type : 'deploy';
 
 // Build an array of fields to be rendered with Slack Attachments as a table
@@ -143,7 +143,7 @@ function _get_secrets($requiredKeys, $defaults)  {
 /**
  * Send a notification to slack
  */
-function _slack_notification($slack_url, $channel, $username, $text, $attachment, $alwaysShowText = false, $icon = ':lightning_cloud:')  {
+function _slack_notification($slack_url, $channel, $username, $text, $attachment, $alwaysShowText = false, $icon = NULL)  {
   $attachment['fallback'] = $text;
   $post = array(
     'username' => $username,
@@ -151,6 +151,14 @@ function _slack_notification($slack_url, $channel, $username, $text, $attachment
     'icon_emoji' => $icon,
     'attachments' => array($attachment)
   );
+
+  if (isset($icon)) {
+    $post['icon_url'] = $icon;
+  }
+  else {
+    $post['icon_emoji'] = ':lightning_cloud:';
+  }
+
   if ($alwaysShowText) {
     $post['text'] = $text;
   }
