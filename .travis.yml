@@ -14,7 +14,8 @@ install:
   - phpenv rehash
   - composer install
   - composer global require pantheon-systems/terminus
-  - which terminus
+  - composer global require drush/drush:dev-master
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - mysql -e 'create database drupal;'
 
 before_script:
