@@ -13,6 +13,7 @@ before_install:
 install:
   - phpenv rehash
   - composer install
+  - composer require pantheon-systems/terminus
   - mysql -e 'create database drupal;'
 
 before_script:
@@ -22,7 +23,7 @@ before_script:
   - git remote add pantheon $PGIT
 
   # Authenticate to Terminus and pull our DB from Pantheon.
-  - terminus auth login --machine-token=$MACHINETOKEN
+  - terminus auth login --machine-token="$MACHINETOKEN"
   - terminus drush sql-dump --site=$PSITE --env=$PENV > db.sql
 
   # Load our downloaded DB.
