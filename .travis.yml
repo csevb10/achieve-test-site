@@ -4,9 +4,6 @@ php:
 
 env:
   global:
-    - PSITE='achieve-test-site'
-    - PENV='dev'
-    - PGIT='ssh://codeserver.dev.5171f630-a1f7-422b-8e0a-20fdf20d1605@codeserver.dev.5171f630-a1f7-422b-8e0a-20fdf20d1605.drush.in:2222/~/repository.git achieve-test-site'
     - secure: "sxC5RYvQr9PNu8HOYyNo0IcaoR+k5xWSf+jSuY62ox8S5CE3K00CaCAPzDwUwTqOgvOkaSS9jEBKE4t4747kWno2JFGTsYjvr4l/KhymkvkPtullj1bi9N51Zn9/1peEZcnNRiAYNaFrLorcVNIBG3Ip47Tjljkge5ILl7nTrNftDV/xcExDgDjeIVRshnS721cIfAV/lBm4wAVqFKvWSSPfq+5sHR7AeZRaBsXA4Im3y8+9zu5pWhyFQDxP2tDEBxJvw8P9mtF5wiWxiHlHc1Y7MQAEYTyS7uF/V7cJbLpv3LaYoYBSeOkjxbthUCRBLuolJ44EO/O/izFsbKx3TnWD/Gym96V1j13D4CP+IFDKNku10qouFQh9AqtWMiK0LAaCM/oczpqaXqP8nw1blr9T5yg80f9crS3nR8yAvw/fIjX/hniwfstmShkeOfrPS+/yIEysY8EgKoDFYg8302T40cEUt12LMwN4YuobWimY0qgXetFARnb8fd2m9H5lapLtQowNe/YZiL7eIwCiR6WfoW392h50PheJWLf8i2kU1OK6J12iANWA40TIO52wW/FR5GmBCJyZTdE0ZPH1ZIVm2BmqC0aczVNgtrSVF8prj2qA7iqt4X5FuogMIfnSMbxI2FT6TAEHYW1Sqnyu3PbDOH2o+RebdP1EpSYhWe4="
 
 before_install:
