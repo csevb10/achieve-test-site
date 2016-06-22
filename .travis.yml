@@ -19,14 +19,16 @@ install:
   - mysql -e 'create database drupal;'
 
 before_script:
+  # This ensures that our terminus login won't hang on prompt.
+  - echo "StrictHostKeyChecking no" > ~/.ssh/config
+
   - echo "sendmail_path='true'" >> `php --ini | grep "Loaded Configuration" | awk '{print $4}'`
 
   # Add our pantheon repo as an endpoint for pushes.
   - git remote add pantheon $PGIT
 
   # Authenticate to Terminus and pull our DB from Pantheon.
-  # - terminus auth login --machine-token=$MACHINETOKEN
-  - terminus auth login $PEMAIL --password=$PPASS
+  - terminus auth login --machine-token=$MACHINETOKEN
   - terminus drush sql-dump --site=$PSITE --env=$PENV > db.sql
 
   # Load our downloaded DB.
