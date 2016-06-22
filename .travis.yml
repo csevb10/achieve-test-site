@@ -13,8 +13,8 @@ before_install:
 install:
   - phpenv rehash
   - composer install
-  - composer global require pantheon-systems/terminus
   - composer global require drush/drush:8.1.2
+  - composer global require pantheon-systems/terminus
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - mysql -e 'create database drupal;'
 
