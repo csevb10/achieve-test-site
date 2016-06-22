@@ -12,9 +12,8 @@ before_install:
 
 install:
   - phpenv rehash
-  - php5dismod -s cli xdebug
-  - composer install
-  - composer require pantheon-systems/terminus
+  - php -n -d extension=json.so composer.phar install
+  - php -n -d extension=json.so composer.phar global require pantheon-systems/terminus
   - mysql -e 'create database drupal;'
 
 before_script:
