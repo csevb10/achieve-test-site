@@ -12,6 +12,7 @@ before_install:
 
 install:
   - phpenv rehash
+  - php5dismod -s cli xdebug
   - composer install
   - composer require pantheon-systems/terminus
   - mysql -e 'create database drupal;'
