@@ -43,7 +43,7 @@ before_script:
   - drush runserver 8080 - </dev/null &>$HOME/server.log &
   - cat $HOME/server.log
   - cd ..
-  - until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do cat $HOME/server.log sleep 0.2; done
+  - until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do cat $HOME/server.log; sleep 0.2; done
   - echo "got here?"
 
 script:
