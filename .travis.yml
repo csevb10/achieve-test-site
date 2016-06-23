@@ -36,7 +36,7 @@ before_script:
 
   # Load our downloaded DB.
   - mysql -uroot drupal < db.sql
-  - drush si --db-url=mysql://root@localhost/drupal
+  - drush si --db-url=mysql://root@localhost/drupal -y
 
   # Run a webserver.
   - drush runserver --server=builtin 8080 --strict=0 &
