@@ -39,11 +39,12 @@ before_script:
   - mysql -uroot drupal < db.sql
 
   # Run a webserver.
-  - drush rs 8080 - &
+  - drush runserver 8080 - </dev/null &>$HOME/server.log &
   - cd ..
   - until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do sleep 0.2; done
 
 script:
+  - echo 'MADE IT HERE'
   - $BASEDIR/vendor/bin/behat
 
   - if [ $TRAVIS_BRANCH == 'master' ] && [ $TRAVIS_PULL_REQUEST == 'false' ]; then
