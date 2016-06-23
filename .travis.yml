@@ -19,6 +19,7 @@ install:
   - composer install
   - composer global require drush/drush:8.1.2
   - composer global require pantheon-systems/terminus
+  - composer global require behat/behat:3.*
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - mysql -e 'create database drupal;'
 
@@ -45,8 +46,8 @@ before_script:
   - until cat $HOME/server.log | grep '8080'; do sleep 0.2; done
 
 script:
-  - echo 'MADE IT HERE'
-  - $BASEDIR/vendor/bin/behat
+  - cd $BASEDIR
+  - behat
 
   - if [ $TRAVIS_BRANCH == 'master' ] && [ $TRAVIS_PULL_REQUEST == 'false' ]; then
       git fetch pantheon &&

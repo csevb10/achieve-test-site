@@ -18,4 +18,5 @@ $defaults = array(
   'dashboard' => 'https://insight.acquia.com/site-list',
   'color' => '#018DC7',
   'icon_url' => 'https://media.glassdoor.com/sqll/347852/acquia-squarelogo-1405365783760.png',
+  'url' => `drush @$site.$environment status | perl -F'/[\s:]+/' -lane '/Site URI/ && print \$F[3]'`,
 );
