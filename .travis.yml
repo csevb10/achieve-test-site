@@ -46,7 +46,7 @@ before_script:
       exit 1
     fi
   - cd ..
-  - until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do sleep 0.2; done
+  - until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do cat $HOME/server.log sleep 0.2; done
   - echo "got here?"
 
 script:
