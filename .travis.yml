@@ -40,6 +40,11 @@ before_script:
 
   # Run a webserver.
   - drush runserver 8080 - </dev/null &>$HOME/server.log &
+  - if [ $? != 0 ]
+    then
+      echo "Could not start php built-in webserver" >&2
+      exit 1
+    fi
   - cd ..
   - until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do sleep 0.2; done
   - echo "got here?"
