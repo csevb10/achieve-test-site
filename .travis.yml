@@ -51,6 +51,6 @@ script:
 
   - if [ $TRAVIS_BRANCH == 'master' ] && [ $TRAVIS_PULL_REQUEST == 'false' ]; then
       git fetch pantheon &&
-      git merge -m "Merge changes to pantheon from github" pantheon/master && git push origin HEAD:master &&
+      git merge -m "Merge changes to pantheon from github" pantheon/master &&
       git push pantheon HEAD:master;
     fi
