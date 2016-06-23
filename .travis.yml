@@ -22,13 +22,18 @@ before_script:
   # This ensures that our terminus login won't hang on prompt.
   - echo "StrictHostKeyChecking no" > ~/.ssh/config
 
+  # Unencrypt our rsa key and move it in for use.
+  - openssl aes-256-cbc -K $encrypted_6a5cf90fd664_key -iv $encrypted_6a5cf90fd664_iv
+    -in travisci_id_rsa.enc -out travisci_id_rsa -d
+  - mv travisci_id_rsa ~/.ssh/id_rsa
+
   - echo "sendmail_path='true'" >> `php --ini | grep "Loaded Configuration" | awk '{print $4}'`
 
   # Add our pantheon repo as an endpoint for pushes.
   - git remote add pantheon $PGIT
 
   # Authenticate to Terminus and pull our DB from Pantheon.
-  - terminus auth login --machine-token=$MACHINETOKEN
+  - terminus auth login bill+travisci@achieveinternet.com --machine-token=$MACHINETOKEN
   - terminus drush sql-dump --site=$PSITE --env=$PENV > db.sql
 
   # Load our downloaded DB.
