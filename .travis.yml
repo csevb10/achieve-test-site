@@ -35,7 +35,7 @@ before_script:
   - terminus drush sql-dump --site=$PSITE --env=$PENV > db.sql
 
   # Load our downloaded DB.
-  - drush si --db-url=mysql://root@localhost/drupal --notify -y
+  - drush si --db-url=mysql://root@localhost/drupal -v -y
   - mysql -uroot drupal < db.sql
 
   # Run a webserver.
