@@ -39,12 +39,10 @@ before_script:
   - mysql -uroot drupal < db.sql
 
   # Run a webserver.
-  - touch $HOME/server.log
   - drush runserver 8080 - </dev/null &>$HOME/server.log &
   - cat $HOME/server.log
   - cd ..
-  - until cat $HOME/server.log>/dev/null | grep '8080'; do sleep 0.2; done
-  - echo "got here?"
+  - until cat $HOME/server.log | grep '8080'; do sleep 0.2; done
 
 script:
   - echo 'MADE IT HERE'
