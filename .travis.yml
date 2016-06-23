@@ -39,10 +39,11 @@ before_script:
   - mysql -uroot drupal < db.sql
 
   # Run a webserver.
+  - touch $HOME/server.log
   - drush runserver 8080 - </dev/null &>$HOME/server.log &
-  - if [ $? != 0 ]
-    then
-      echo "Could not start php built-in webserver" >&2
+  - if [ $? != 0 ]; then
+      echo "Could not start php built-in webserver" >&2;
+      cat $HOME/server.log;
       exit 1
     fi
   - cd ..
