@@ -13,7 +13,7 @@ else {
 
 $color  = isset($defaults['color']) ? $defaults['color'] : '#EFD01B';
 $url    = 'http://' . str_replace(array("\r\n", "\n"), '', (isset($defaults['url']) ? $defaults['url'] : `drush @$site.$environment status | perl -F'/[\s:]+/' -lane '/Site URI/ && print \$F[3]'`));
-$icon   = isset($defaults['icon']) ? $defaults['icon'] : ':lightning_cloud:';
+$icon   = isset($defaults['icon_url']) ? $defaults['icon_url'] : NULL;
 $type   = isset($type) ? $type : 'deploy';
 
 // Build an array of fields to be rendered with Slack Attachments as a table
@@ -25,7 +25,7 @@ $fields = array(
     'value' => $site,
     'short' => 'true'
   ),
-  array( // Render Environment name with link to site, <http://{ENV}-{SITENAME}.pantheon.io|{ENV}>
+  array( // Render Environment name with link to site
     'title' => 'Environment',
     'value' => '<' . $url . '|' . $environment . '>',
     'short' => 'true'
@@ -62,7 +62,7 @@ switch($type) {
     // https://api.slack.com/incoming-webhooks
     $text = 'Deploy to the '. $environment;
     $text .= ' environment of '. $site . ' complete!';
-    // $text .= "\n\n*DEPLOY MESSAGE*: $deploy_message";
+
     // Build an array of fields to be rendered with Slack Attachments as a table
     // attachment-style formatting:
     // https://api.slack.com/docs/attachments
@@ -143,14 +143,21 @@ function _get_secrets($requiredKeys, $defaults)  {
 /**
  * Send a notification to slack
  */
-function _slack_notification($slack_url, $channel, $username, $text, $attachment, $alwaysShowText = false, $icon = ':lightning_cloud:')  {
+function _slack_notification($slack_url, $channel, $username, $text, $attachment, $alwaysShowText = false, $icon = NULL)  {
   $attachment['fallback'] = $text;
   $post = array(
     'username' => $username,
     'channel' => $channel,
-    'icon_emoji' => $icon,
     'attachments' => array($attachment)
   );
+
+  if (isset($icon)) {
+    $post['icon_url'] = $icon;
+  }
+  else {
+    $post['icon_emoji'] = ':lightning_cloud:';
+  }
+
   if ($alwaysShowText) {
     $post['text'] = $text;
   }

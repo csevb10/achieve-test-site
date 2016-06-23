@@ -20,4 +20,5 @@ $defaults = array(
   'color' => '#EFD01B',
   'email' => $_POST['user_email'],
   'url' => $environment . '-' . $site . '.pantheonsite.io',
+  'icon_url' => 'https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAYOAAAAJDRlNDc0ZjM3LTkxNmMtNDgyZi1iZTBhLTAwMTA3OTU4ZDM1Mg.png',
 );
