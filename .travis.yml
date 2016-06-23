@@ -36,9 +36,10 @@ before_script:
 
   # Load our downloaded DB.
   - mysql -uroot drupal < db.sql
+  - drush si --db-url=mysql://root@localhost/drupal
 
   # Run a webserver.
-  - $BASEDIR/vendor/bin/drush runserver --server=builtin 8080 --strict=0 &
+  - drush runserver --server=builtin 8080 --strict=0 &
   - cd ..
   - until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do sleep 0.2; done
 
