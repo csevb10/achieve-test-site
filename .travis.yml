@@ -15,7 +15,7 @@ before_install:
   - composer self-update
   - export BASEDIR=${PWD}
   - if [ PANTHEON ]; then
-      CMDPATH="private/hooks/libraries/ci/pantheon/";
+      CMDPATH="private/hooks/libraries/ci/pantheon";
     fi
 
 install:
