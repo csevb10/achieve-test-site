@@ -23,7 +23,6 @@ install:
   - composer install
   - composer global require drush/drush:8.1.2
   - $CMDPATH/install-dependencies.sh
-  - composer global require pantheon-systems/terminus
   - composer global require behat/behat:3.*
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - mysql -e 'create database drupal;'
@@ -34,11 +33,9 @@ before_script:
   - echo "sendmail_path='true'" >> `php --ini | grep "Loaded Configuration" | awk '{print $4}'`
 
   # Add our pantheon repo as an endpoint for pushes.
-  - git remote add pantheon $PGIT
+  - git remote add paas $PGIT
 
-  # Authenticate to Terminus and pull our DB from Pantheon.
-  - terminus auth login --machine-token=$MACHINETOKEN
-  - terminus drush sql-dump --site=$PSITE --env=$PENV > db.sql
+  - $CMDPATH/pull-db.sh
 
   # Load our downloaded DB.
   - drush si --db-url=mysql://root@localhost/drupal -v -y
@@ -46,7 +43,6 @@ before_script:
 
   # Run a webserver.
   - drush runserver 8080 - </dev/null &>$HOME/server.log &
-  - cat $HOME/server.log
   - cd ..
   - until cat $HOME/server.log | grep '8080'; do sleep 0.2; done
 
@@ -55,7 +51,7 @@ script:
   - behat
 
   - if [ $TRAVIS_BRANCH == 'master' ] && [ $TRAVIS_PULL_REQUEST == 'false' ]; then
-      git fetch pantheon &&
-      git merge -m "Merge changes to pantheon from github" pantheon/master &&
-      git push pantheon HEAD:master;
+      git fetch paas &&
+      git merge -m "Merge changes to pantheon from github" paas/master &&
+      git push paas HEAD:master;
     fi
